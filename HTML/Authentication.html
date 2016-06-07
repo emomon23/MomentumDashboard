@@ -1,0 +1,27 @@
+﻿
+<div class="container">
+
+    <h2 class="form-signin-heading">Please sign in</h2>
+    
+    <div>
+       <label>Email address</label>
+        <div>
+            <input id="userName" placeholder="Username" ng-model="data.user.userName" required="" autofocus="true">
+        </div>
+    </div>
+    
+    <div>
+       <label>Password</label>
+       <div>
+          <input id="password" placeholder="Password" ng-model="data.user.password" required="" type="password" value="P@ssword23!">
+       </div>
+    </div>
+    
+    <div class="checkbox">
+        <label>
+            <input value="remember-me" ng-model="user.rememberMe" type="checkbox"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-primary" ng-click="authenticate()">Sign in</button>
+
+</div>

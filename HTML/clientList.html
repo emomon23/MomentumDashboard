@@ -1,0 +1,14 @@
+﻿
+
+<div class="panel panel-default row"  ng-if="data.user.isAdmin">
+    <div class="col-xs-2">
+        <a ng-click="promptForNewClient()" class="btn btn-block btn-default btn-sm">New Client</a>
+    </div>
+    <div class="col-xs-9">
+        
+        <div class="well" ng-repeat="client in data.clients">
+             <a href ng-click="getApplications(client.clientGuid)"> {{ client.clientName}}</a>
+        </div>
+         
+    </div>
+</div>

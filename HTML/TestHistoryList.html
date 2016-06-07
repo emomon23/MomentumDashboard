@@ -1,0 +1,29 @@
+﻿
+<div class="panel panel-default row">
+    <div class="col-xs-2">
+        <a href="#/applications" class="btn btn-block btn-default btn-sm">Applications</a>
+        <a ng-click="showTestRegistrationDialog()" class="btn btn-block btn-default btn-sm">Register Test UD</a>
+    </div>
+    <div class="col-xs-9">
+        <table border="1" id="testHistoryTable">
+            <tr>
+                <th>Test Name</th>
+                <th colspan="7">Dates Ran</th>
+            </tr>
+            <tbody ng-repeat="testFamily in data.appHistory.testFamilies">
+                <tr>
+                    <td class="testFamilyRow">{{ testFamily.familyText }}</td>
+                    <td class="testFamilyRow" colspan="7"></td>
+                </tr>
+                <tr ng-repeat="testHistory in testFamily.tests">
+                    <td class="testName" ng-click="testHistoryKeyClick(testHistory.testNumber)">{{ testHistory.testNumber }} {{ testHistory.testName }}</td>
+                    <td ng-repeat="run in testHistory.runHistory" class="runHistory" ng-if="!testHistory.isUnderDevelopment" ng-class="getRunHistoryClass(run)">
+                        <a class="runHistoryItem" right-click-popup-menu="runHistorySubMenu" pre-popup-call="setCurrentTestRunHistory('{{run.testRunId}}')" href="{{ run.testReportLink }}" target="_blank">{{ run.displayTest }}</a>
+                    </td>
+
+                    <td ng-if="testHistory.isUnderDevelopment" class="underDevelopment" colspan="7">Under development {{'(ETA: ' + testHistory.eta + ')' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

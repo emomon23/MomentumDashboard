@@ -1,0 +1,156 @@
+.navbar-right { float: right !important; margin-right: 5px;}
+
+.navbar-text { margin-right:10px;}
+
+ng-invalid
+{
+    background-color: lightpink;
+}
+
+ng-valid
+{
+    background-color: lightgreen;
+}
+
+.error
+{
+    color: red;
+}
+
+.ng-modal-overlay {
+  /* A dark translucent div that covers the whole screen */
+  position:absolute;
+  z-index:9999;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:#000000;
+  opacity: 0.8;
+}
+.ng-modal-dialog {
+  /* A centered div above the overlay with a box shadow. */
+  z-index:10000;
+  position: absolute;
+  width: 50%; /* Default */
+
+  /* Center the dialog */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+
+  background-color: #fff;
+  box-shadow: 4px 4px 80px #000;
+}
+.ng-modal-dialog-content {
+  padding:10px;
+  text-align: left;
+}
+.ng-modal-close {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 120%;
+  display: inline-block;
+  font-weight: bold;
+  font-family: 'arial', 'sans-serif';
+}
+
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid #CCC;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Each of the items in the list */
+.custom-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.custom-menu li:hover {
+    background-color: #DEF;
+}
+
+
+.testFamilyRow {
+    padding-top:5px;
+    background-color: lightgray;
+    font-weight:bold;
+}
+
+.testName {
+    padding-left:10px;
+}
+
+.underDevelopment {
+    background-color: orange;
+    text-align:center;
+    font-weight:bold;
+}
+
+.passed {
+    background-color: chartreuse;
+}
+
+.failed {
+    background-color: red;
+}
+
+.failedPrereqs {
+    background-color: darkorange
+}
+
+.runHistory {
+    width: 9%;
+    text-align:center;
+}
+
+.runHistoryItem {
+    font-weight:bold;
+    color:black
+}
+
+
+
+#testHistoryTable {
+    width:100%;
+}
+
+#testHistoryTable th {
+    text-align: center;
+}
+
+#testHistoryTable th:first-child {
+    width:33%;
+  
+}
+
+
+
+#errorMsg {
+    color:darkred;
+    margin-left:50px;
+}
+
+
+
+
+
+
+
+
+

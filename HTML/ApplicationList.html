@@ -1,0 +1,18 @@
+﻿
+
+<div class="panel panel-default row">
+    <div class="col-xs-2" ng-if="data.user.isAdmin">
+        <a ng-click="promptForNewApplication()" class="btn btn-block btn-default btn-sm">New Application</a>
+        <a ng-click="showNewClientUserDialog()" class="btn btn-block btn-default btn-sm">New Client User</a>
+        <a href="#/clients" class="btn btn-block btn-default btn-sm">Clients</a>
+    </div>
+    <div class="col-xs-9">
+
+        <div class="well" ng-repeat="application in data.applications">
+            <a href ng-click="getTestHistory(application.applicationGuid)"> {{ application.applicationName}}</a>
+            &nbsp;
+            {{ application.applicationGuid }}
+        </div>
+
+    </div>
+</div>

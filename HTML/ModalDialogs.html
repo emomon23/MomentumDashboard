@@ -1,0 +1,188 @@
+﻿<modal-dialog show='modalFlags.showNewApplicationDialog' width='350px' height='250px'>
+    <h1>New Application</h1>
+
+    <div class="well">
+        <div><label>Application Name</label></div>
+        <div>
+            <input id="newApplication" ng-model="data.newApplicationName" />
+        </div>
+    </div>
+    <div>
+        <button ng-click="saveNewApplication()">Save</button>
+    </div>
+</modal-dialog>
+
+
+<modal-dialog show='modalFlags.editRunHistoryItem' width='800px' height='470px'>
+    <h1>Edit Run History Item</h1>
+
+    <div class="well">
+        <div><label>Recorded Bug URL</label></div>
+        <div>
+            <input id="bugURL" ng-model="data.currentTestRunHistoryItem.bugReportLink" style="width:720px" />
+        </div>
+        <div><label>Comment</label></div>
+        <div>
+            <textarea name="textarea" rows="10" cols="100"  ng-model="data.currentTestRunHistoryItem.comments" >Write something here</textarea>
+        </div>
+    </div>
+    <div>
+        <button ng-click="updateRunHistoryItem()">Save</button>
+    </div>
+</modal-dialog>
+
+<modal-dialog show='modalFlags.showTestRegistrationDialog' width='800px' height='670px'>
+    <h1>New Test</h1>
+    
+    <div class="well">
+        <div><label>Test Family</label></div>
+        <div>
+            <input id="newUnregisteredTest" style="width:720px" ng-model="data.newTest.testFamily" />
+        </div>
+
+
+        <div><label>Test Number</label></div>
+        <div>
+            <input style="width:720px" ng-model="data.newTest.testNumber" />
+        </div>
+    
+        <div><label>Test Name</label></div>
+        <div>
+            <input  style="width:720px" ng-model="data.newTest.testName" />
+        </div>
+    
+        <div><label>Test Description</label></div>
+        <div>
+            <textarea name="textarea" rows="10" cols="100" ng-model="data.newTest.testDescription"></textarea>
+        </div>
+
+        <div><label>Test ETA (Date)</label></div>
+        <div>
+            <input style="width:720px" ng-model="data.newTest.eta" />
+        </div>
+    </div>
+
+
+    <div>
+        <button ng-click="saveNewUnregisteredTest()">Save</button>
+    </div>
+</modal-dialog>
+
+
+<modal-dialog show="modalFlags.showChangePwd" width ="350px" height="350px">
+    <h1>Change Password</h1>
+    Please change your password now.
+    <div class="well">
+        <div><label>New Password</label></div>
+        <div>
+            <input type="password" id="newPwd" ng-model="data.newPassword" />
+        </div>
+        <div><label>Confirm Password</label></div>
+        <div>
+            <input type="password" id="confirmNewPwd" ng-model="data.confirmNewPassword" />
+        </div>
+    </div>
+    <div>
+        {{ newPasswordValidationMessage }}
+    </div>
+    <div>
+        <button ng-click="changePassword()">Save</button>
+    </div>
+</modal-dialog>
+
+<modal-dialog show='modalFlags.showNewClientUserDialog' width='300px' height='450px'>
+    <div class="well">
+            <div>
+                <label>Contact First Name</label>
+            </div>
+            <div>
+                <input ng-model="data.newClientUser.firstName" />
+            </div>
+            <div>
+                <label>Contact Last Name</label>
+            </div>
+            <div>
+                <input ng-model="data.newClientUser.lastName" />
+            </div>
+            <div>
+                <label>Contact Email</label>
+            </div>
+            <div>
+                <input ng-model="data.newClientUser.email" />
+            </div>
+            <div>
+                <label>Contact Username</label>
+            </div>
+            <div>
+                <input ng-model="data.newClientUser.userName" />
+            </div>
+            <div>
+                <label>Contact Password</label>
+            </div>
+            <div>
+                <input ng-model="data.newClientUser.password" />
+            </div>
+    </div>
+
+    <div>
+        <button ng-click="saveNewClientUser()">Save</button>
+    </div>
+</modal-dialog>
+
+<modal-dialog show='modalFlags.showNewClientDialog' width='300px' height='550px'>
+    <h1>New Client</h1>
+    <div class="well">
+    <div>
+        <label>Client Name</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.clientName" />
+    </div>
+    <div>
+        <label>Contact First Name</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.firstName" />
+    </div>
+    <div>
+        <label>Contact Last Name</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.lastName" />
+    </div>
+    <div>
+        <label>Contact Email</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.email" />
+    </div>
+    <div>
+        <label>Contact Username</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.userName" />
+    </div>
+    <div>
+        <label>Contact Password</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.password" />
+    </div>
+    <div>
+        <label>Initial Application</label>
+    </div>
+    <div>
+        <input ng-model="data.newClient.applicationName" />
+    </div>
+    </div>
+
+    <div>
+        <button ng-click="saveNewClient()">Save</button>
+    </div>
+</modal-dialog>
+
+<ul id='runHistorySubMenu' class="custom-menu">
+    <li ng-click="runItemBugClick()">{{ data.bugPopupMenuText }}</li>
+    <li ng-click="runItemViewBugClick()" ng-if="data.viewBugMenuText != ''">{{ data.viewBugMenuText}}</li>
+    <li ng-click="runItemCommentClick()">{{ data.commentPopupMenuText }}</li>
+</ul>

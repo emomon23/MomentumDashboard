@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <title>Automation Dashboard</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+
+    <script src="scripts/angular/angular.js"></script>
+    <script src="Scripts/Angular/angular-route.js"></script>
+
+    <script>
+        //CREATE a new module called ''
+        angular.module("app", ['ngRoute']);
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="Scripts/Custom/Services/LocalServer.js"></script>
+    <script src="scripts/Custom/Controllers/MainController.js"></script>
+    <script src="Scripts/Custom/Controllers/AppModuleConfig.js"></script>
+    <script src="Scripts/Custom/Directives/ModalDialog.js"></script>
+    <script src="Scripts/Custom/Directives/RightClickPopupMenu.js"></script>
+    <script src="../Scripts/Custom/Directives/OnKeyPress.js"></script>
+</head>
+<body ng-controller="mainCTRL" on-key-press="keyPress" on-key-up="keyUp">
+
+    <div class='navbar navbar-inverse'>
+        <h2><a class='nav-brand' href='#'>&nbsp;&nbsp;Momentum</a></h2>
+    </div>
+
+    <div id="errorMsg" ng-style="{opacity: errorOpacity }">{{ data.errorMessage }}</div>
+
+    <div ng-hide="data.user.isAuthenticated">
+        <ng-include src="'/html/Authentication.html'" />
+    </div>
+    <div ng-show="data.user.isAuthenticated">
+        <ng-view></ng-view>
+    </div>
+
+    <ng-include src="'/html/ModalDialogs.html'" />
+</body>
+</html>
