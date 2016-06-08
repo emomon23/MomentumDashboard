@@ -27,12 +27,15 @@ namespace Test.IEmosoft.com
         	  .ContractResolver = new CamelCasePropertyNamesContractResolver();
 
          Database.SetInitializer<TestDBContext>(null);
+
+         //Create a new SaltVector file.
+         SaltVector saltVector = new SaltVector();
        
         }
 
         protected void Session_Start()
         {
-          
+            SaltVector saltVector = new SaltVector();
         }
         
     }

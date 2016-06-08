@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Diagnostics;
@@ -13,17 +14,17 @@ namespace Test.IEmosoft.com.BusinessLogic
     /// Read more: http://en.wikipedia.org/wiki/Advanced_Encryption_Standard
     /// </summary>
     public static class AES
-    {
-        private const string _SALT = "CREATE_YOUR_OWN_SALE"; //EG. "F14biP65;
-        private const string _INITVECTOR = "CREATE_YOUR_OWN_VECTOR"; //EG. "IGFbs95m*htc01bZ";
-        private const string _password = "SomePassword";
+    {      
+        private static string _password = "SomePassword";
         private static byte[] _saltBytes;
         private static byte[] _initVectorBytes;
 
         static AES()
         {
-            _saltBytes = Encoding.UTF8.GetBytes(_SALT);
-            _initVectorBytes = Encoding.UTF8.GetBytes(_INITVECTOR);
+            SaltVector saltVector = new SaltVector();
+
+            _saltBytes = Encoding.UTF8.GetBytes(saltVector.Salt);
+            _initVectorBytes = Encoding.UTF8.GetBytes(saltVector.InitVector);
         }
 
 
@@ -139,5 +140,121 @@ namespace Test.IEmosoft.com.BusinessLogic
                 }
             }
         }
+    }
+
+    public class SaltVector
+    {
+        private string saltFilePath = "";
+        private string[] fileContents = new string[0];
+        private Random random = new Random(DateTime.Now.Millisecond * DateTime.Now.Millisecond);
+
+        public SaltVector()
+        {
+            saltFilePath = string.Format("{0}MomentumDataFiles", Path.GetPathRoot(Directory.GetCurrentDirectory()));
+            if (!Directory.Exists(saltFilePath))
+            {
+                Directory.CreateDirectory(saltFilePath);
+            }
+
+            saltFilePath += "\\MomentumSaltVector.dat";
+
+            if (!ReadFileContents())
+            {
+                CreateNewSaltValues();
+                ReadFileContents();
+            }
+        }
+
+        public string Salt
+        {
+            get
+            {
+                return fileContents.Length > 0 ? fileContents[0] : null;
+            }
+        }
+
+        public string InitVector
+        {
+            get
+            {
+                return fileContents.Length > 1 ? fileContents[1] : null;
+            }
+        }
+        private void CreateNewSaltValues()
+        {
+            string rawFileContents = string.Format("{0}{2}{1}{2}", GenerateNewSalt(), GenerateNewInitVector(), Environment.NewLine);
+            File.WriteAllText(saltFilePath, rawFileContents);
+        }
+
+        private bool ReadFileContents()
+        {
+           
+            if (File.Exists(saltFilePath))
+            {
+                fileContents = File.ReadAllLines(saltFilePath);
+
+                var backupFile = saltFilePath.Replace(".dat", ".backup");
+                if (!File.Exists(backupFile) && fileContents.Length > 0)
+                {
+                    File.WriteAllLines(backupFile, fileContents);
+                }
+            }
+
+            return fileContents.Length > 0;
+        }
+
+        private string GenerateNewSalt()
+        {
+            string result = GetRandomString(1);
+            result += GetRandomNumber(2);
+            result += GetRandomString(2);
+            result += GetRandomString(1, true);
+            result += GetRandomNumber(2);
+
+            return result;
+        }
+
+        private string GetRandomString(int length, bool returnUpperCase = false)
+        {
+            StringBuilder builder = new StringBuilder();
+           
+            char ch;
+            for (int i = 0; i < length; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return returnUpperCase? builder.ToString().ToUpper() : builder.ToString().ToLower();
+        }
+
+        private string GetRandomNumber(int numberOfDigits)
+        {
+            string minValueString = "1";
+            string maxValueString = "9";
+
+            for (int i = 0; i < numberOfDigits - 1; i++)
+            {
+                minValueString += "0";
+                maxValueString += "0";
+            }
+
+            return random.Next(int.Parse(minValueString), int.Parse(maxValueString)).ToString();
+        }
+
+        private string GenerateNewInitVector()
+        {
+            var result = GetRandomString(3, true);
+            result += GetRandomString(2);
+            result += GetRandomNumber(2);
+            result += GetRandomString(1) + "*";
+            result += GetRandomString(3);
+            result += GetRandomNumber(2);
+            result += GetRandomString(1);
+            result += GetRandomString(1, true);
+
+            return result;
+        }
+
     }
 }
